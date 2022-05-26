@@ -59,6 +59,7 @@ class GameOver:
 
 
 with agk.Application(width=1024, height=768, app_name="Ascension"):
+    agk.set_window_title("Ascension")
     agk.set_virtual_resolution(320, 240)
     agk.set_clear_color(0, 200, 200)
     agk.set_sync_rate(30, 0)
