@@ -9,9 +9,12 @@ SPAWN_RANGE = (10, 40)
 class Demon:
     _IMAGE_ID = 0
     SPEED = 1
+    SPAWN_SOUND = 0
 
     def __init__(self):
         self.sprite_id = self._create_demon_sprite()
+        if not Demon.SPAWN_SOUND:
+            Demon.SPAWN_SOUND = agk.load_sound("demon-spawn.wav")
         self._player = None
 
     def set_player(self, value):
@@ -80,6 +83,7 @@ class Demon:
         self.position = spawnx, agk.get_view_offset_y() - _config.TILE_SIZE * 3
         agk.set_sprite_visible(self.sprite_id, True)
         agk.set_sprite_active(self.sprite_id, True)
+        agk.play_sound(Demon.SPAWN_SOUND, 50)
 
     def deactivate(self):
         agk.set_sprite_visible(self.sprite_id, False)

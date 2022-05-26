@@ -15,6 +15,9 @@ class Player:
         self.is_alive = True
         self.sprite_id = self._create_ghost_sprite()
         self.death_animation_sprite = self._create_death_animation_sprite()
+        self.death_animation_sound = _agk.load_sound("player-death.wav")
+        self.game_over_sound = _agk.load_sound("game-over.wav")
+        self.ghost_appears_sound = _agk.load_sound("ghost-appears.wav")
         _agk.set_view_offset(0, 0)
         _agk.set_clear_color(0, 200, 200)
         self._start_y = self.position[1]
@@ -66,11 +69,13 @@ class Player:
         _agk.set_sprite_visible(self.death_animation_sprite, True)
         _agk.set_sprite_active(self.death_animation_sprite, True)
         _agk.play_sprite(self.death_animation_sprite, 3, False)
+        _agk.play_sound(self.death_animation_sound)
 
     def update(self):
-        if _agk.get_sprite_current_frame(self.death_animation_sprite) == 6:
+        if not self.active and _agk.get_sprite_current_frame(self.death_animation_sprite) == 6:
             _agk.set_sprite_visible(self.sprite_id, True)
             _agk.set_sprite_active(self.sprite_id, True)
+            _agk.play_sound(self.ghost_appears_sound)
         if not _agk.get_sprite_active(self.sprite_id):
             return
         self.move_horizontally()
@@ -107,3 +112,4 @@ class Player:
     def die(self):
         self.is_alive = False
         _session.active = False
+        _agk.play_sound(self.game_over_sound)
