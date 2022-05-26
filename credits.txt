@@ -13,3 +13,6 @@ https://opengameart.org/content/animated-filthy-ectoplasm
 Platformer Shooter 2D Shotgun 7 Actions
 ashuuya
 https://opengameart.org/content/platformer-shooter-2d-shotgun-7-actions
+
+
+Sounds created using Bfxr
